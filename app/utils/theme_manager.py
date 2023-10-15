@@ -120,6 +120,25 @@ QPushButton:pressed {
     background-color: #1a7f64;
 }
 
+QMenu {
+    background-color: #444654;
+    border-radius: 15px;
+    margin: 5px;
+    font-size: 10pt;
+    padding: 5px;
+}
+
+QMenu::item {
+    color: white;
+    padding: 5px 10px;
+    padding-right: 15px;
+}
+
+QMenu::item:selected {
+    background-color: #343541;
+}
+
+
 # QCheckBox::indicator:checked {
 #     image: url(path_to_checked_image);
 # }
