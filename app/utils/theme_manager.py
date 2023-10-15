@@ -77,7 +77,7 @@ QComboBox {
 
 QSlider::groove:horizontal {
     border: 1px solid #555;
-    background: #444;
+    background: #d9d9e3;
     height: 8px;
     border-radius: 4px;
 }
@@ -89,18 +89,6 @@ QSlider::handle:horizontal {
     margin: -5px 0;
     border-radius: 4px;
 }
-
-QCheckBox {
-    padding: 5px;
-}
-
-QCheckBox::indicator {
-    width: 15px;
-    height: 15px;
-    border: 1px solid #555;
-    background: #444;
-}
-
 
 QPushButton {
     background-color: #10a37f;
