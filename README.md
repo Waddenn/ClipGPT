@@ -16,7 +16,7 @@ ClipGPT is a dynamic and user-friendly system tray application that offers insta
 
 - **Quick Access to Settings via Right-Click on the Icon**:
   
-![image](https://github.com/Waddenn/ClipGPT/assets/115143365/0d929c1a-e15e-417d-94e8-ab6dfdf8a1d3)
+![image](https://github.com/Waddenn/ClipGPT/assets/115143365/71e92ecf-66e8-44b6-9d2e-dd7f9ab3a364)
 
 - **General Settings**:
   
