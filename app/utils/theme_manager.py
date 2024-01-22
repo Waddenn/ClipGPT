@@ -1,7 +1,5 @@
 from PyQt6.QtGui import QPalette, QColor
-from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import Qt
-
 
 def set_dark_theme(app):
     dark_palette = QPalette()
@@ -16,7 +14,6 @@ def set_dark_theme(app):
     dark_palette.setColor(QPalette.ColorRole.ButtonText, Qt.GlobalColor.white)
     dark_palette.setColor(QPalette.ColorRole.BrightText, Qt.GlobalColor.red)
     dark_palette.setColor(QPalette.ColorRole.Link, QColor(42, 130, 218))
-
     dark_palette.setColor(QPalette.ColorRole.Highlight, QColor(42, 130, 218))
     dark_palette.setColor(QPalette.ColorRole.HighlightedText, Qt.GlobalColor.black)
 
@@ -106,6 +103,17 @@ QPushButton:hover {
 
 QPushButton:pressed {
     background-color: #1a7f64;
+}
+QPushButton#removeButton {
+    background-color: #444654; 
+    color: white;
+    border: 2px solid #10a37f;
+    width: 50px; 
+    height: 13px; 
+}
+
+QPushButton#removeButton:hover {
+    background-color: #10a37f; 
 }
 
 QMenu {

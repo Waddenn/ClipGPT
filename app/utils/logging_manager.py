@@ -5,20 +5,15 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QTextEdit,
 )
-
 from app.utils.config_manager import load_config
 from app.constants import LOG_FILE_PATH
 
 LOG_CONTENT = []
 
-original_print = print
-
-
 def custom_print(*args, color="black"):
-    """Custom print function to capture logs."""
     message = " ".join(map(str, args))
     colored_message = f'<font color="{color}">{message}</font>'
-    original_print(message)
+    print(message)
     LOG_CONTENT.append(colored_message)
     if len(LOG_CONTENT) > 100:
         del LOG_CONTENT[0]
@@ -26,10 +21,6 @@ def custom_print(*args, color="black"):
     config = load_config()
     if config["save_logs_to_file"]:
         save_logs_to_file()
-
-
-print = custom_print
-
 
 def save_logs_to_file():
     with open(LOG_FILE_PATH, "a", encoding="utf-8") as file:

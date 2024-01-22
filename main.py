@@ -1,7 +1,6 @@
 import sys
 import openai
 import time
-from PyQt6.QtGui import QFontDatabase
 from PyQt6.QtWidgets import (
     QApplication,
 )
@@ -23,7 +22,7 @@ def clean_exit():
 
 if __name__ == "__main__":
     config = load_config()
-    openai.api_key = config["api_key"]
+    openai.api_key = config["gpt_api_key"]
     app = QApplication(sys.argv)
 
     set_dark_theme(app)
@@ -35,3 +34,5 @@ if __name__ == "__main__":
         target=listen_for_shortcut, args=(tray_icon, config, STOP_EVENT)
     ).start()
     sys.exit(app.exec())
+
+
