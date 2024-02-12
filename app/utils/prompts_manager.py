@@ -1,5 +1,14 @@
+from PyQt6.QtWidgets import (
+    QWidget,
+    QVBoxLayout,
+    QListWidget,
+    QPushButton,
+    QHBoxLayout,
+    QInputDialog,
+    QLineEdit,
+    QLabel,
+)
 
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QListWidget, QPushButton, QHBoxLayout, QInputDialog, QLineEdit, QLabel
 
 class PromptsManager(QWidget):
     def __init__(self, config, parent=None):
@@ -10,7 +19,6 @@ class PromptsManager(QWidget):
     def add_widget_pair(self, layout, label_text, widget):
         layout.addWidget(QLabel(label_text))
         layout.addWidget(widget)
-
 
     def setup_ui(self):
         layout = QVBoxLayout(self)

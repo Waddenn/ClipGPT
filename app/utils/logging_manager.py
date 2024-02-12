@@ -10,6 +10,7 @@ from app.constants import LOG_FILE_PATH
 
 LOG_CONTENT = []
 
+
 def custom_print(*args, color="black"):
     message = " ".join(map(str, args))
     colored_message = f'<font color="{color}">{message}</font>'
@@ -21,6 +22,7 @@ def custom_print(*args, color="black"):
     config = load_config()
     if config["save_logs_to_file"]:
         save_logs_to_file()
+
 
 def save_logs_to_file():
     with open(LOG_FILE_PATH, "a", encoding="utf-8") as file:

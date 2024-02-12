@@ -1,6 +1,7 @@
 from PyQt6.QtGui import QPalette, QColor
 from PyQt6.QtCore import Qt
 
+
 def set_dark_theme(app):
     dark_palette = QPalette()
     dark_palette.setColor(QPalette.ColorRole.Window, QColor(53, 53, 53))

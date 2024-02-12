@@ -10,22 +10,29 @@ import pyperclip
 
 print = custom_print
 
+
 def get_clipboard_content():
     return pyperclip.paste()
+
 
 def handle_shortcut(tray_icon, config):
     try:
         config = load_config()
         gpt_api_key = config.get("gpt_api_key")
         mistral_api_key = config.get("mistral_api_key")
-        model_name = config.get("model_name")  
+        model_name = config.get("model_name")
         clipboard_content = get_clipboard_content()
         if clipboard_content:
             print("Question from clipboard:", clipboard_content, color="blue")
             tray_icon.setIcon(QIcon(LOADING_ICON_PATH))
 
-            answer = handle_api_response(model_name, mistral_api_key if "mistral" in model_name else gpt_api_key, clipboard_content, config)
-            
+            answer = handle_api_response(
+                model_name,
+                mistral_api_key if "mistral" in model_name else gpt_api_key,
+                clipboard_content,
+                config,
+            )
+
             print("Response:", answer, color="green")
             pyperclip.copy(answer)
             tray_icon.setIcon(QIcon(NORMAL_ICON_PATH))
@@ -50,4 +57,3 @@ def listen_for_shortcut(tray_icon, config, STOP_EVENT):
                         handle_shortcut(tray_icon, config)
                         break
         time.sleep(0.1)
-

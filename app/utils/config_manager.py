@@ -18,6 +18,7 @@ from config.constants import DEFAULT_CONFIG, AVAILABLE_MODELS, MODEL_TOKEN_RANGE
 from app.constants import CONFIG_FILE_PATH
 from app.utils.prompts_manager import PromptsManager
 
+
 def load_config():
     if os.path.exists(CONFIG_FILE_PATH):
         with open(CONFIG_FILE_PATH, "r") as f:
@@ -58,8 +59,12 @@ class ConfigDialog(QDialog):
         general_tab, tab_layout = self.create_tab("General")
 
         initial_api_key = self.config.get(
-            "mistral_api_key" if "mistral" in self.config["model_name"].lower() else "gpt_api_key",
-            self.config.get("api_key", "")
+            (
+                "mistral_api_key"
+                if "mistral" in self.config["model_name"].lower()
+                else "gpt_api_key"
+            ),
+            self.config.get("api_key", ""),
         )
         self.api_key_edit = QLineEdit(initial_api_key, self)
         self.add_widget_pair(tab_layout, "API Key:", self.api_key_edit)
@@ -69,7 +74,9 @@ class ConfigDialog(QDialog):
         self.model_name_combo.setCurrentText(self.config["model_name"])
         self.add_widget_pair(tab_layout, "Model Name:", self.model_name_combo)
 
-        self.token_value_label = QLabel(f"Max Tokens: {self.config['max_tokens']}", self)
+        self.token_value_label = QLabel(
+            f"Max Tokens: {self.config['max_tokens']}", self
+        )
         self.token_slider = QSlider(Qt.Orientation.Horizontal, self)
         self.update_slider_range(self.config["model_name"])
         self.token_slider.setValue(self.config["max_tokens"])
@@ -79,7 +86,9 @@ class ConfigDialog(QDialog):
         tab_layout.addWidget(self.token_value_label)
         tab_layout.addWidget(self.token_slider)
 
-        self.temperature_value_label = QLabel(f"Temperature: {self.config['temperature']}", self)
+        self.temperature_value_label = QLabel(
+            f"Temperature: {self.config['temperature']}", self
+        )
         self.temperature_slider = QSlider(Qt.Orientation.Horizontal, self)
         self.temperature_slider.setRange(0, 20)
         self.temperature_slider.setValue(int(self.config["temperature"] * 10))
@@ -112,24 +121,29 @@ class ConfigDialog(QDialog):
 
     def save_and_close(self):
         from app.utils.tray_icon_manager import refresh_prompts_submenu
-        QMessageBox.information(self, "Settings Saved", "Your settings have been saved successfully.")
+
+        QMessageBox.information(
+            self, "Settings Saved", "Your settings have been saved successfully."
+        )
         model_name = self.model_name_combo.currentText()
         api_key = self.api_key_edit.text()
-        
+
         if "mistral" in model_name.lower():
             self.config["mistral_api_key"] = api_key
         elif "gpt" in model_name.lower():
             self.config["gpt_api_key"] = api_key
-        
+
         self.config["model_name"] = model_name
         self.config["max_tokens"] = self.token_slider.value()
         self.config["temperature"] = self.temperature_slider.value() / 10.0
         self.config["save_logs_to_file"] = self.save_logs_checkbox.isChecked()
-        
+
         current_item = self.prompts_manager.prompts_list.currentItem()
         if current_item:
-            self.config["prompts"][current_item.text()] = self.prompts_manager.prompt_edit.text()
-        
+            self.config["prompts"][
+                current_item.text()
+            ] = self.prompts_manager.prompt_edit.text()
+
         save_config(self.config)
         refresh_prompts_submenu()
 
@@ -144,6 +158,3 @@ class ConfigDialog(QDialog):
     def update_temperature_value(self, value):
         real_value = value / 10.0
         self.temperature_value_label.setText(f"Temperature: {real_value:.1f}")
-
-
-
